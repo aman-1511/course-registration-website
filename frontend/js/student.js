@@ -2,8 +2,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
+    
+    // Redirect to login if token is missing
     if (!token) {
         window.location.href = 'index.html';
+        return;
     }
 
     // Logout functionality

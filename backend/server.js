@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+const passport = require('passport');
+const session = require('express-session');
 const connectDB = require('./config/db');
 
 // Import routes
@@ -10,13 +12,22 @@ const studentRoutes = require('./routes/studentRoutes');
 const teacherRoutes = require('./routes/teacherRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 
-const app = express();
 dotenv.config();
 connectDB();
+
+const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(session({
+    secret: 'mycoursessecret',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve frontend files
 app.use(express.static(path.join(__dirname, '../frontend')));
@@ -33,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
