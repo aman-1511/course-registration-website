@@ -9,6 +9,7 @@
     <div class="login-container">
         <img src="assets/logo.png" alt="Logo" class="logo">
         <h2>Login</h2>
+        
         <form id="loginForm">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -32,6 +33,10 @@
     
             <button type="submit">Login</button>
         </form>
+
+        <!-- Google Sign-In Button -->
+        <button onclick="handleGoogleLogin()">Sign in with Google</button>
+
         <div id="error" class="error-message"></div>
     </div>
     

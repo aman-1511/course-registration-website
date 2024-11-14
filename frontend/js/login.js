@@ -1,8 +1,4 @@
-
-
-
-// login.js
-
+// Handle traditional login form submission
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -17,7 +13,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
     
     try {
-        const response = await fetch('/api/auth/login', {  // relative path
+        const response = await fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -31,11 +27,11 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             // Save token to localStorage
             localStorage.setItem('token', data.token);
             // Redirect based on role
-            if (role === 'student') {
+            if (data.role === 'student') {
                 window.location.href = 'student_dashboard.html';
-            } else if (role === 'teacher') {
+            } else if (data.role === 'teacher') {
                 window.location.href = 'teacher_dashboard.html';
-            } else if (role === 'admin') {
+            } else if (data.role === 'admin') {
                 window.location.href = 'admin_dashboard.html';
             }
         } else {
@@ -46,3 +42,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         errorDiv.textContent = 'An error occurred. Please try again.';
     }
 });
+
+// Handle Google login
+async function handleGoogleLogin() {
+    // Redirect user to Google authentication page
+    window.location.href = '/api/auth/google';
+}

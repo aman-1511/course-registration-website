@@ -22,7 +22,6 @@
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
-                        <!-- Add more semesters as needed -->
                     </select>
                 </div>
     
@@ -30,7 +29,6 @@
                     <label for="course">Select Course:</label>
                     <select id="course" name="course" required>
                         <option value="">Select Course</option>
-                        <!-- Courses will be populated based on semester selection -->
                     </select>
                 </div>
     
@@ -53,17 +51,31 @@
     
         <section class="status-section">
             <h2>Pending Courses</h2>
-            <ul id="pendingCourses">
-                <!-- Pending courses will be listed here -->
-            </ul>
+            <ul id="pendingCourses"></ul>
     
             <h2>Accepted Courses</h2>
-            <ul id="acceptedCourses">
-                <!-- Accepted courses will be listed here -->
-            </ul>
+            <ul id="acceptedCourses"></ul>
         </section>
     </main>
     
+    <script>
+        // Function to handle token and role from the URL
+        function checkGoogleAuthToken() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            const role = params.get('role');
+    
+            if (token && role === 'student') {
+                // Store token in localStorage
+                localStorage.setItem('token', token);
+                // Remove token and role from the URL
+                window.history.replaceState({}, document.title, '/student_dashboard.html');
+            }
+        }
+
+        // Run the function on page load
+        checkGoogleAuthToken();
+    </script>
     <script src="js/student.js"></script>
 </body>
 </html>
