@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="css/teacher.css">
+</head>
+<body>
+    <header>
+        <h1>Teacher Dashboard</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+    
+    <main>
+        <section class="add-course-section">
+            <h2>Add New Course</h2>
+            <form id="addCourseForm">
+                <div class="form-group">
+                    <label for="courseTitle">Course Title:</label>
+                    <input type="text" id="courseTitle" name="courseTitle" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="courseCode">Course Code:</label>
+                    <input type="text" id="courseCode" name="courseCode" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="semester">Semester:</label>
+                    <select id="semester" name="semester" required>
+                        <option value="">Select Semester</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <!-- Add more semesters as needed -->
+                    </select>
+                </div>
+    
+                <div class="form-group">
+                    <label for="credits">Credits:</label>
+                    <input type="number" id="credits" name="credits" min="1" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+    
+                <button type="submit">Add Course</button>
+            </form>
+        </section>
+    
+        <section class="manage-courses-section">
+            <h2>Manage Courses</h2>
+            <ul id="coursesList">
+                <!-- Teacher's courses will be listed here -->
+            </ul>
+        </section>
+        
+        <!-- Pending Enrollments Section -->
+        <section class="manage-enrollments-section">
+            <h2>Pending Enrollments</h2>
+            <ul id="pendingEnrollments">
+                <!-- Pending enrollments will be listed here -->
+            </ul>
+        </section>
+    </main>
+    
+    <script src="js/teacher.js"></script>
+</body>
+</html>

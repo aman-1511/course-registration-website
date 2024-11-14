@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header>
+        <h1 id="welcomeMessage">Welcome, Admin</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+    
+    <main>
+        <section class="course-viewer-section">
+            <h2>View Courses</h2>
+            <div class="view-options">
+                <button id="viewStudentCourses">View Student Selected Courses</button>
+                <button id="viewTeacherCourses">View Teacher Offered Courses</button>
+            </div>
+            <ul id="coursesList">
+                <!-- Courses will be displayed here -->
+            </ul>
+        </section>
+    
+        <section class="create-user-section">
+            <h2>Create New User</h2>
+            <form id="createUserForm">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="role">Role:</label>
+                    <select id="role" name="role" required>
+                        <option value="">Select Role</option>
+                        <option value="student">Student</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+    
+                <!-- Conditional Fields -->
+                <div id="studentFields" class="conditional-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="semester">Semester:</label>
+                        <input type="number" id="semester" name="semester" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="startYear">Start Year:</label>
+                        <input type="number" id="startYear" name="startYear">
+                    </div>
+                    <div class="form-group">
+                        <label for="endYear">End Year:</label>
+                        <input type="number" id="endYear" name="endYear">
+                    </div>
+                </div>
+    
+                <div id="teacherFields" class="conditional-fields" style="display: none;">
+                    <div class="form-group">
+                        <label for="department">Department:</label>
+                        <input type="text" id="department" name="department">
+                    </div>
+                </div>
+    
+                <button type="submit">Create User</button>
+            </form>
+            <div id="userCreationMessage" class="message"></div>
+        </section>
+    </main>
+    
+    <script src="js/admin.js"></script>
+</body>
+</html>
