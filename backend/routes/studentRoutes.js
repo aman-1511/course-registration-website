@@ -1,11 +1,11 @@
-// routes/studentRoutes.js
+
 
 const express = require('express');
 const router = express.Router();
 const { getCoursesBySemester, enrollCourse, getEnrollments, updateEnrollment, deleteEnrollment } = require('../controllers/studentController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
-// Protect all routes below
+
 router.use(protect);
 router.use(authorize('student'));
 

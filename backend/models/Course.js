@@ -1,4 +1,5 @@
-// models/Course.js
+
+
 
 const mongoose = require('mongoose');
 
@@ -14,8 +15,7 @@ const CourseSchema = new mongoose.Schema({
     },
     courseCode: {
         type: String,
-        required: true,
-        unique: true
+        required: true 
     },
     semester: {
         type: Number,

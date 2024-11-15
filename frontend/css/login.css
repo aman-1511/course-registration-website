@@ -1,4 +1,4 @@
-/* login.css */
+
 
 body {
     font-family: Arial, sans-serif;
@@ -51,6 +51,15 @@ button {
     cursor: pointer;
 }
 
+
+button[type="submit"] {
+    margin-bottom: 20px; 
+}
+
+button + button {
+    margin-top: 15px; 
+}
+
 button:hover {
     background-color: #434190;
 }
@@ -59,3 +68,4 @@ button:hover {
     color: red;
     margin-top: 10px;
 }
+

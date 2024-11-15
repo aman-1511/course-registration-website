@@ -3,7 +3,7 @@ const Course = require('../models/Course');
 const Enrollment = require('../models/Enrollment');
 const bcrypt = require('bcryptjs');
 
-// Create a new user
+
 exports.createUser = async (req, res) => {
     const { name, username, password, role, semester, startYear, endYear, department } = req.body;
 
@@ -34,7 +34,7 @@ exports.createUser = async (req, res) => {
     }
 };
 
-// Get courses selected by students
+
 exports.getStudentSelectedCourses = async (req, res) => {
     try {
         const enrollments = await Enrollment.find()
@@ -49,7 +49,7 @@ exports.getStudentSelectedCourses = async (req, res) => {
     }
 };
 
-// Get courses offered by teachers
+
 exports.getTeacherOfferedCourses = async (req, res) => {
     try {
         const courses = await Course.find()

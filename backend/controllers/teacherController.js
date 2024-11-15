@@ -1,12 +1,17 @@
-// controllers/teacherController.js
+
 
 const Course = require('../models/Course');
 const Enrollment = require('../models/Enrollment');
 
-// Add a new course
+
 exports.addCourse = async (req, res) => {
     const { courseTitle, courseCode, semester, credits, status } = req.body;
     const userId = req.user.userId;
+
+   
+    if (!courseCode) {
+        return res.status(400).json({ message: 'Course code is required.' });
+    }
 
     try {
         const course = new Course({
@@ -26,7 +31,8 @@ exports.addCourse = async (req, res) => {
     }
 };
 
-// Get courses for the logged-in teacher
+
+
 exports.getCourses = async (req, res) => {
     const userId = req.user.userId;
 
@@ -39,7 +45,7 @@ exports.getCourses = async (req, res) => {
     }
 };
 
-// Delete a course
+
 exports.deleteCourse = async (req, res) => {
     const courseId = req.params.id;
     const userId = req.user.userId;
@@ -57,7 +63,7 @@ exports.deleteCourse = async (req, res) => {
     }
 };
 
-// Get pending enrollments for the teacher's courses
+
 exports.getPendingEnrollments = async (req, res) => {
     const teacherId = req.user.userId;
 
@@ -70,7 +76,7 @@ exports.getPendingEnrollments = async (req, res) => {
                 select: 'courseTitle courseCode'
             });
 
-        // Filter enrollments to ensure only valid courses for this teacher are included
+      
         const filteredEnrollments = enrollments.filter(enrollment => enrollment.course);
         res.json({ enrollments: filteredEnrollments });
     } catch (error) {
@@ -79,9 +85,9 @@ exports.getPendingEnrollments = async (req, res) => {
     }
 };
 
-// Update enrollment status (accept or decline) by teacher
+
 exports.updateEnrollmentStatus = async (req, res) => {
-    const { status } = req.body; // Expecting status to be 'accepted' or 'pending'
+    const { status } = req.body;
     const enrollmentId = req.params.id;
 
     try {
@@ -100,7 +106,7 @@ exports.updateEnrollmentStatus = async (req, res) => {
     }
 };
 
-// Delete (decline) enrollment
+
 exports.deleteEnrollment = async (req, res) => {
     const enrollmentId = req.params.id;
 

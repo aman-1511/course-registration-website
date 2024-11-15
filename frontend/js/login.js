@@ -1,4 +1,4 @@
-// Handle traditional login form submission
+
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
@@ -24,9 +24,9 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         const data = await response.json();
         
         if (response.ok) {
-            // Save token to localStorage
+           
             localStorage.setItem('token', data.token);
-            // Redirect based on role
+          
             if (data.role === 'student') {
                 window.location.href = 'student_dashboard.html';
             } else if (data.role === 'teacher') {
@@ -43,8 +43,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     }
 });
 
-// Handle Google login
+
 async function handleGoogleLogin() {
-    // Redirect user to Google authentication page
+    
     window.location.href = '/api/auth/google';
 }

@@ -1,19 +1,17 @@
-
-// teacher.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     if (!token) {
         window.location.href = 'index.html';
+        return;
     }
 
-    // Logout functionality
+   
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('token');
         window.location.href = 'index.html';
     });
 
-    // Handle add course form submission
+   
     document.getElementById('addCourseForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const courseTitle = document.getElementById('courseTitle').value.trim();
@@ -42,14 +40,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 loadCourses();
                 document.getElementById('addCourseForm').reset();
             } else {
-                alert(data.message || 'Failed to add course.');
+                alert(data.message || 'Failed to add course. Please ensure the course code is unique for your courses.');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred while adding the course. Please try again.');
         }
     });
 
-    // Load teacher's courses
+   
     async function loadCourses() {
         try {
             const response = await fetch('/api/teacher/courses', {
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     li.textContent = `${course.courseCode} - ${course.courseTitle} (${course.semester})`;
                     const actions = document.createElement('div');
                     actions.classList.add('action-buttons');
-                    
+
                     const deleteBtn = document.createElement('button');
                     deleteBtn.textContent = 'Delete';
                     deleteBtn.addEventListener('click', () => deleteCourse(course._id));
@@ -75,18 +74,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     li.appendChild(actions);
                     coursesList.appendChild(li);
                 });
-                loadPendingEnrollments();  // Load pending enrollments whenever courses are loaded
+                loadPendingEnrollments(); 
             } else {
                 alert(data.message || 'Failed to load courses.');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred while loading courses.');
         }
     }
 
     loadCourses();
 
-    // Load pending enrollments for teacher's courses
+    
     async function loadPendingEnrollments() {
         try {
             const response = await fetch('/api/teacher/enrollments/pending', {
@@ -119,10 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred while loading pending enrollments.');
         }
     }
 
-    // Update enrollment status to accepted
+   
     async function updateEnrollmentStatus(enrollmentId, status) {
         try {
             const response = await fetch(`/api/teacher/enrollments/${enrollmentId}`, {
@@ -136,16 +137,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (response.ok) {
                 alert('Enrollment accepted successfully.');
-                loadPendingEnrollments();  // Refresh pending enrollments
+                loadPendingEnrollments();  
             } else {
                 alert(data.message || 'Failed to update enrollment.');
             }
         } catch (error) {
             console.error('Error:', error);
+            alert('An error occurred while updating enrollment status.');
         }
     }
 
-    // Delete (decline) enrollment
+   
     async function deleteEnrollment(enrollmentId) {
         if (confirm('Are you sure you want to decline this enrollment?')) {
             try {
@@ -158,17 +160,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Enrollment declined.');
-                    loadPendingEnrollments();  // Refresh pending enrollments
+                    loadPendingEnrollments();  
                 } else {
                     alert(data.message || 'Failed to decline enrollment.');
                 }
             } catch (error) {
                 console.error('Error:', error);
+                alert('An error occurred while declining the enrollment.');
             }
         }
     }
 
-    // Delete course
+  
     async function deleteCourse(courseId) {
         if (confirm('Are you sure you want to delete this course?')) {
             try {
@@ -181,12 +184,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Course deleted successfully.');
-                    loadCourses();  // Refresh courses after deletion
+                    loadCourses();  
                 } else {
                     alert(data.message || 'Failed to delete course.');
                 }
             } catch (error) {
                 console.error('Error:', error);
+                alert('An error occurred while deleting the course.');
             }
         }
     }

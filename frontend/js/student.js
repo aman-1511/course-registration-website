@@ -1,21 +1,19 @@
-// student.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     
-    // Redirect to login if token is missing
+    
     if (!token) {
         window.location.href = 'index.html';
         return;
     }
 
-    // Logout functionality
+  
     document.getElementById('logoutBtn').addEventListener('click', () => {
         localStorage.removeItem('token');
         window.location.href = 'index.html';
     });
 
-    // Fetch courses based on semester selection
+   
     const semesterSelect = document.getElementById('semester');
     const courseSelect = document.getElementById('course');
 
@@ -48,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle enrollment form submission
+    
     document.getElementById('enrollmentForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const semester = semesterSelect.value;
@@ -73,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (response.ok) {
                 alert('Enrollment submitted successfully.');
-                loadEnrollments();  // Refresh enrollment lists
+                loadEnrollments(); 
             } else {
                 alert(data.message || 'Failed to submit enrollment.');
             }
@@ -82,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Load pending and accepted courses
+   
     async function loadEnrollments() {
         try {
             const response = await fetch('/api/student/enrollments', {
@@ -130,9 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    loadEnrollments();  // Initial load of enrollments
+    loadEnrollments();  
 
-    // Edit enrollment status
     async function editEnrollment(enrollmentId) {
         const newStatus = prompt('Enter new status (enrolled/not_enrolled):');
         if (newStatus === 'enrolled' || newStatus === 'not_enrolled') {
@@ -148,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Enrollment updated successfully.');
-                    loadEnrollments();  // Refresh lists after update
+                    loadEnrollments();  
                 } else {
                     alert(data.message || 'Failed to update enrollment.');
                 }
@@ -160,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Delete enrollment
+   
     async function deleteEnrollment(enrollmentId) {
         if (confirm('Are you sure you want to delete this enrollment?')) {
             try {
@@ -173,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     alert('Enrollment deleted successfully.');
-                    loadEnrollments();  // Refresh lists after deletion
+                    loadEnrollments();  
                 } else {
                     alert(data.message || 'Failed to delete enrollment.');
                 }

@@ -1,4 +1,4 @@
-// controllers/studentController.js
+
 
 const Enrollment = require('../models/Enrollment');
 const Course = require('../models/Course');
